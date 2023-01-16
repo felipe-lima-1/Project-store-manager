@@ -1,4 +1,5 @@
 const productsModel = require('../models/productsModel');
+const { productValidate } = require('./validation');
 
 const findAll = async () => {
   const products = await productsModel.findAll();
@@ -7,6 +8,7 @@ const findAll = async () => {
 
 const findById = async (id) => {
   const product = await productsModel.findById(id);
+  console.log(product);
   if (!product.length) {
     return { err: { code: 'not_found', message: 'Product not found' } };
   }
@@ -14,6 +16,8 @@ const findById = async (id) => {
 };
 
 const createProduct = async (name) => {
+  const resValidation = productValidate(name);
+  if (resValidation) return resValidation;
   const product = await productsModel.createProduct(name);
   return product;
 };
