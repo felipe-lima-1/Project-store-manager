@@ -10,6 +10,8 @@ app.get('/', (_request, response) => {
 });
 app.get('/products', productsController.findAll);
 app.get('/products/:id', productsController.findById);
+app.get('/sales', salesController.findAllSales); 
+app.get('/sales/:id', salesController.findSaleById);
 app.post('/products', productsController.createProduct);
 app.post('/sales', salesController.newSaleProduct);
 
