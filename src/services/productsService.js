@@ -22,6 +22,15 @@ const createProduct = async (name) => {
   return product;
 };
 
+const updateProducts = async (id, name) => {
+  const [result] = await productsModel.findById(id);
+  if (result !== undefined) {
+    await productsModel.updateProducts(id, name);
+    return true;
+  }
+  return false;
+};
+
 const deleteProduct = async (id) => {
   const [product] = await productsModel.findById(id);
   if (!product) return { status: 404, response: { message: 'Product not found' } };
@@ -33,5 +42,6 @@ module.exports = {
   findAll,
   findById,
   createProduct,
+  updateProducts,
   deleteProduct,
 };

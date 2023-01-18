@@ -23,6 +23,14 @@ const maxProduct = async () => {
   return maxId.id;
 };
 
+const updateProducts = async (id, name) => {
+  const [{ affectedRows }] = await connection.execute(
+    'UPDATE products SET name=? WHERE id=?',
+    [name, id],
+  );
+  return affectedRows;
+};
+
 const deleteProduct = async (id) => {
   await connection.execute('DELETE FROM products WHERE id=?', [id]);
   return true;
@@ -33,5 +41,6 @@ module.exports = {
   findById,
   createProduct,
   maxProduct,
+  updateProducts,
   deleteProduct,
 };
